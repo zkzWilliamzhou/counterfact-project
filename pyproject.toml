@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "counterfact-cli"
+version = "0.1.0"
+description = "Find the smallest tested environment change that flips a passing command into a specific failure"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Debuggers",
+]
+
+[project.scripts]
+counterfact = "counterfact.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["counterfact*"]
+
+[tool.counterfact]
+note = "stdlib only on purpose: no network, no telemetry, no third-party parsers"

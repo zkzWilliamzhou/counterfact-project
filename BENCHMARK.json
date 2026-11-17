@@ -1,0 +1,320 @@
+{
+  "cases": 20,
+  "cost_ok": 20,
+  "cost_rate": 1.0,
+  "elapsed_s": 5.72,
+  "gates": {
+    "cost_95pct_under_50": true,
+    "recovery_ge_90pct": true
+  },
+  "max_executions": 37,
+  "median_executions": 23,
+  "passed": true,
+  "recovered": 20,
+  "recovery_rate": 1.0,
+  "rows": [
+    {
+      "case": 0,
+      "executions": 11,
+      "found": [
+        "F1"
+      ],
+      "planted": [
+        "F1"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 1,
+      "executions": 26,
+      "found": [
+        "F1",
+        "F3",
+        "F4"
+      ],
+      "planted": [
+        "F1",
+        "F3",
+        "F4"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 2,
+      "executions": 25,
+      "found": [
+        "F0",
+        "F3"
+      ],
+      "planted": [
+        "F0",
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 3,
+      "executions": 11,
+      "found": [
+        "F3"
+      ],
+      "planted": [
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 4,
+      "executions": 37,
+      "found": [
+        "F0",
+        "F1",
+        "F3"
+      ],
+      "planted": [
+        "F0",
+        "F1",
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 5,
+      "executions": 23,
+      "found": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "planted": [
+        "F3",
+        "F4",
+        "F5"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 6,
+      "executions": 23,
+      "found": [
+        "F2",
+        "F5"
+      ],
+      "planted": [
+        "F2",
+        "F5"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 7,
+      "executions": 11,
+      "found": [
+        "F1"
+      ],
+      "planted": [
+        "F1"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 8,
+      "executions": 24,
+      "found": [
+        "F1",
+        "F4"
+      ],
+      "planted": [
+        "F1",
+        "F4"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 9,
+      "executions": 27,
+      "found": [
+        "F1",
+        "F2",
+        "F5"
+      ],
+      "planted": [
+        "F1",
+        "F2",
+        "F5"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 10,
+      "executions": 24,
+      "found": [
+        "F2",
+        "F3"
+      ],
+      "planted": [
+        "F2",
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 11,
+      "executions": 19,
+      "found": [
+        "F0",
+        "F1",
+        "F2"
+      ],
+      "planted": [
+        "F0",
+        "F1",
+        "F2"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 12,
+      "executions": 11,
+      "found": [
+        "F3"
+      ],
+      "planted": [
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 13,
+      "executions": 37,
+      "found": [
+        "F0",
+        "F1",
+        "F3"
+      ],
+      "planted": [
+        "F0",
+        "F1",
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 14,
+      "executions": 11,
+      "found": [
+        "F1"
+      ],
+      "planted": [
+        "F1"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 15,
+      "executions": 12,
+      "found": [
+        "F2"
+      ],
+      "planted": [
+        "F2"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 16,
+      "executions": 27,
+      "found": [
+        "F1",
+        "F2",
+        "F5"
+      ],
+      "planted": [
+        "F1",
+        "F2",
+        "F5"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 17,
+      "executions": 13,
+      "found": [
+        "F1",
+        "F2"
+      ],
+      "planted": [
+        "F1",
+        "F2"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 18,
+      "executions": 11,
+      "found": [
+        "F3"
+      ],
+      "planted": [
+        "F3"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    },
+    {
+      "case": 19,
+      "executions": 27,
+      "found": [
+        "F1",
+        "F2",
+        "F4"
+      ],
+      "planted": [
+        "F1",
+        "F2",
+        "F4"
+      ],
+      "recovered": true,
+      "status": "CONFIRMED",
+      "under_50": true
+    }
+  ],
+  "seed": 20261114
+}

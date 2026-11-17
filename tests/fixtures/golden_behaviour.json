@@ -1,0 +1,882 @@
+{
+  "no_reproduction": {
+    "experiment_count": 2,
+    "experiments": [
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 1,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "always fine\n",
+        "stdout_sha256": "b9de260105c2b4eee6af88786ec4add83e292e7e8e931e3cf1d13be2c7a3f9aa",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 2,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "always fine\n",
+        "stdout_sha256": "b9de260105c2b4eee6af88786ec4add83e292e7e8e931e3cf1d13be2c7a3f9aa",
+        "timed_out": false,
+        "truncated": false
+      }
+    ],
+    "factors": [],
+    "oracle": {
+      "expect_fail_text": "never appears",
+      "mode": "fingerprint"
+    },
+    "partial": false,
+    "plan": {
+      "budget": {
+        "max_output_bytes": 65536,
+        "max_runs": 60,
+        "max_total_s": 300.0,
+        "repeats": 3,
+        "timeout_s": 10.0
+      },
+      "command": [
+        "<PYTHON>",
+        "check.py"
+      ],
+      "estimated_max_executions": 18,
+      "execution_authorized": false,
+      "factor_count": 2,
+      "factors": [
+        {
+          "bad": "true",
+          "good": "false",
+          "kind": "env",
+          "name": "CI"
+        },
+        {
+          "bad": "UTC",
+          "good": "Asia/Shanghai",
+          "kind": "env",
+          "name": "TZ"
+        }
+      ],
+      "inert": true,
+      "oracle": {
+        "expect_fail_text": "never appears",
+        "mode": "fingerprint"
+      },
+      "safety": [
+        "No shell is used; argv is passed as a list.",
+        "Each run gets a fresh private workspace and constructed environment.",
+        "Snapshot values never become arguments or shell strings.",
+        "Dangerous loader/interpreter variables are refused.",
+        "Every run has wall-clock, CPU, file-size, fd and output caps.",
+        "Process groups are terminated on timeout.",
+        "Secrets are redacted in all emitted reports."
+      ],
+      "schema_version": 1,
+      "scope": "No conclusion is printed unless anchors, minimality and stability all hold.",
+      "warnings": [
+        "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output."
+      ]
+    },
+    "replication": {
+      "successes": 0,
+      "trials": 0
+    },
+    "schema_version": 1,
+    "scope_notice": "This is a 1-minimal tested causal set under the supplied oracle, runner and captured states. It is NOT proof of a unique root cause, NOT proof that the underlying code is correct, and NOT valid outside these bounded conditions.",
+    "status": "INCONCLUSIVE",
+    "warnings": [
+      "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output.",
+      "Applying all captured differences did not reproduce the failure. counterfact will not invent a cause."
+    ]
+  },
+  "single_factor": {
+    "experiment_count": 11,
+    "experiments": [
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 1,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 2,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: timezone-sensitive branch\n",
+        "stderr_sha256": "9131c313922581f7bd732d579a7fc242da889c447e22a7afc265cd9c60238f66",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 3,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 4,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: timezone-sensitive branch\n",
+        "stderr_sha256": "9131c313922581f7bd732d579a7fc242da889c447e22a7afc265cd9c60238f66",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 5,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: timezone-sensitive branch\n",
+        "stderr_sha256": "9131c313922581f7bd732d579a7fc242da889c447e22a7afc265cd9c60238f66",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 6,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: timezone-sensitive branch\n",
+        "stderr_sha256": "9131c313922581f7bd732d579a7fc242da889c447e22a7afc265cd9c60238f66",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 7,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: timezone-sensitive branch\n",
+        "stderr_sha256": "9131c313922581f7bd732d579a7fc242da889c447e22a7afc265cd9c60238f66",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 8,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 9,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 10,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 11,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      }
+    ],
+    "factors": [
+      "TZ"
+    ],
+    "oracle": {
+      "expect_fail_text": "FAIL: timezone-sensitive branch",
+      "mode": "fingerprint"
+    },
+    "partial": false,
+    "plan": {
+      "budget": {
+        "max_output_bytes": 65536,
+        "max_runs": 60,
+        "max_total_s": 300.0,
+        "repeats": 3,
+        "timeout_s": 10.0
+      },
+      "command": [
+        "<PYTHON>",
+        "check.py"
+      ],
+      "estimated_max_executions": 18,
+      "execution_authorized": false,
+      "factor_count": 2,
+      "factors": [
+        {
+          "bad": "true",
+          "good": "false",
+          "kind": "env",
+          "name": "CI"
+        },
+        {
+          "bad": "UTC",
+          "good": "Asia/Shanghai",
+          "kind": "env",
+          "name": "TZ"
+        }
+      ],
+      "inert": true,
+      "oracle": {
+        "expect_fail_text": "FAIL: timezone-sensitive branch",
+        "mode": "fingerprint"
+      },
+      "safety": [
+        "No shell is used; argv is passed as a list.",
+        "Each run gets a fresh private workspace and constructed environment.",
+        "Snapshot values never become arguments or shell strings.",
+        "Dangerous loader/interpreter variables are refused.",
+        "Every run has wall-clock, CPU, file-size, fd and output caps.",
+        "Process groups are terminated on timeout.",
+        "Secrets are redacted in all emitted reports."
+      ],
+      "schema_version": 1,
+      "scope": "No conclusion is printed unless anchors, minimality and stability all hold.",
+      "warnings": [
+        "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output."
+      ]
+    },
+    "replication": {
+      "successes": 7,
+      "trials": 7
+    },
+    "schema_version": 1,
+    "scope_notice": "This is a 1-minimal tested causal set under the supplied oracle, runner and captured states. It is NOT proof of a unique root cause, NOT proof that the underlying code is correct, and NOT valid outside these bounded conditions.",
+    "status": "CONFIRMED",
+    "warnings": [
+      "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output."
+    ]
+  },
+  "two_factor_interaction": {
+    "experiment_count": 28,
+    "experiments": [
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 1,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "@UMASK",
+          "CI",
+          "TERM",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 2,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "@UMASK",
+          "CI"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 3,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TERM",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 4,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TERM",
+          "TZ"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 5,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "@UMASK",
+          "CI"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 6,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "@UMASK"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 7,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 8,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TERM"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 9,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 10,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TERM",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 11,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 12,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TERM"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 13,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 14,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TERM",
+          "TZ"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 15,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 16,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 17,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 18,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 19,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": true,
+        "error": "",
+        "exit_code": 0,
+        "index": 20,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 21,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 22,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI",
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 1,
+        "index": 23,
+        "outcome": "FAIL",
+        "stderr_excerpt": "FAIL: interaction branch\n",
+        "stderr_sha256": "dbeeca3f77db627d7a37c0465b33f5229288e7f31a827238977a9efd31dd5a08",
+        "stdout_excerpt": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 24,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 25,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 26,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "TZ"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 27,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      },
+      {
+        "applied": [
+          "CI"
+        ],
+        "cache_hit": false,
+        "error": "",
+        "exit_code": 0,
+        "index": 28,
+        "outcome": "PASS",
+        "stderr_excerpt": "",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_excerpt": "ok\n",
+        "stdout_sha256": "dc51b8c96c2d745df3bd5590d990230a482fd247123599548e0632fdbf97fc22",
+        "timed_out": false,
+        "truncated": false
+      }
+    ],
+    "factors": [
+      "CI",
+      "TZ"
+    ],
+    "oracle": {
+      "expect_fail_text": "FAIL: interaction branch",
+      "mode": "fingerprint"
+    },
+    "partial": false,
+    "plan": {
+      "budget": {
+        "max_output_bytes": 65536,
+        "max_runs": 60,
+        "max_total_s": 300.0,
+        "repeats": 3,
+        "timeout_s": 10.0
+      },
+      "command": [
+        "<PYTHON>",
+        "check.py"
+      ],
+      "estimated_max_executions": 28,
+      "execution_authorized": false,
+      "factor_count": 4,
+      "factors": [
+        {
+          "bad": "077",
+          "good": "022",
+          "kind": "umask",
+          "name": "@UMASK"
+        },
+        {
+          "bad": "true",
+          "good": "false",
+          "kind": "env",
+          "name": "CI"
+        },
+        {
+          "bad": "xterm",
+          "good": "dumb",
+          "kind": "env",
+          "name": "TERM"
+        },
+        {
+          "bad": "UTC",
+          "good": "Asia/Shanghai",
+          "kind": "env",
+          "name": "TZ"
+        }
+      ],
+      "inert": true,
+      "oracle": {
+        "expect_fail_text": "FAIL: interaction branch",
+        "mode": "fingerprint"
+      },
+      "safety": [
+        "No shell is used; argv is passed as a list.",
+        "Each run gets a fresh private workspace and constructed environment.",
+        "Snapshot values never become arguments or shell strings.",
+        "Dangerous loader/interpreter variables are refused.",
+        "Every run has wall-clock, CPU, file-size, fd and output caps.",
+        "Process groups are terminated on timeout.",
+        "Secrets are redacted in all emitted reports."
+      ],
+      "schema_version": 1,
+      "scope": "No conclusion is printed unless anchors, minimality and stability all hold.",
+      "warnings": [
+        "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output."
+      ]
+    },
+    "replication": {
+      "successes": 8,
+      "trials": 8
+    },
+    "schema_version": 1,
+    "scope_notice": "This is a 1-minimal tested causal set under the supplied oracle, runner and captured states. It is NOT proof of a unique root cause, NOT proof that the underlying code is correct, and NOT valid outside these bounded conditions.",
+    "status": "CONFIRMED",
+    "warnings": [
+      "Oracle is 'fingerprint': a non-zero exit without the expected text is UNRESOLVED, not FAIL. Matching uses the first --max-output-bytes of output."
+    ]
+  }
+}

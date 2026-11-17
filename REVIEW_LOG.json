@@ -1,0 +1,86 @@
+[
+  {
+    "elapsed_s": 0.23,
+    "findings": [],
+    "name": "Static analysis, supply chain, protocols",
+    "round": 1,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 6.16,
+    "findings": [],
+    "name": "Full unit / integration test suite",
+    "round": 2,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 0.0,
+    "findings": [],
+    "name": "Adversarial parser fuzzing",
+    "round": 3,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 0.43,
+    "findings": [],
+    "name": "Security controls and secret hygiene",
+    "round": 4,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 0.01,
+    "findings": [],
+    "name": "Algorithm correctness and status reachability",
+    "round": 5,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 3.23,
+    "findings": [],
+    "name": "Resource bounds, process groups, cleanup",
+    "round": 6,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 1.46,
+    "findings": [],
+    "name": "CI / UX / documentation contract",
+    "round": 7,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 1.85,
+    "findings": [],
+    "name": "Equivalence, packaging, dogfooding",
+    "round": 8,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 6.48,
+    "findings": [],
+    "name": "Planted-fixture recovery benchmark",
+    "round": 9,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 0.0,
+    "findings": [],
+    "name": "Noise injection / false-cause resistance",
+    "round": 10,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 0.44,
+    "findings": [],
+    "name": "Documentation and version consistency",
+    "round": 11,
+    "verdict": "PASS"
+  },
+  {
+    "elapsed_s": 18.55,
+    "findings": [],
+    "name": "Release-candidate CLI and install smoke",
+    "round": 12,
+    "verdict": "PASS"
+  }
+]

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>counterfact — architecture review</title>
+<style>
+  :root {
+    --bg: #0e1117; --panel: #161b24; --line: #2b3442; --ink: #e6edf3;
+    --dim: #9aa7b6; --accent: #7ee0b8; --warn: #f0b37e; --bad: #f08a8a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 3rem 1.5rem 5rem; background: var(--bg); color: var(--ink);
+    font: 15px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  main { max-width: 1080px; margin: 0 auto; }
+  h1 { font-size: 2rem; margin: 0 0 .35rem; letter-spacing: -.02em; }
+  .lede { color: var(--dim); margin: 0 0 2.5rem; max-width: 70ch; }
+  h2 { font-size: 1.15rem; margin: 2.6rem 0 1rem; padding-bottom: .5rem;
+       border-bottom: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+          padding: 1.25rem 1.4rem; }
+  .card h3 { margin: 0 0 .75rem; font-size: 1rem; }
+  .badge { display: inline-block; font-size: .72rem; letter-spacing: .06em;
+           text-transform: uppercase; padding: .18rem .55rem; border-radius: 999px;
+           border: 1px solid var(--line); color: var(--dim); margin-bottom: .8rem; }
+  .strong { color: var(--accent); border-color: var(--accent); }
+  .worth { color: var(--warn); border-color: var(--warn); }
+  .spec { color: var(--dim); }
+  .card p { margin: .5rem 0; color: var(--dim); }
+  .card strong { color: var(--ink); font-weight: 600; }
+  .files { font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+           color: var(--accent); word-break: break-all; }
+  .viz { background: #11161f; border: 1px solid var(--line); border-radius: 10px;
+         padding: 1rem; margin-top: .9rem; }
+  svg { width: 100%; height: auto; display: block; }
+  .lab { font: 11px ui-monospace, monospace; fill: var(--ink); }
+  .sub { font: 10px ui-monospace, monospace; fill: var(--dim); }
+  .box { fill: #1d2634; stroke: #3b4a60; stroke-width: 1.2; rx: 7; }
+  .hot { fill: #3a2530; stroke: var(--bad); }
+  .cool { fill: #173029; stroke: var(--accent); }
+  .edge { stroke: #56657b; stroke-width: 1.3; fill: none; marker-end: url(#ar); }
+  .seam { stroke: var(--warn); stroke-dasharray: 4 3; }
+  .top { background: linear-gradient(135deg, #173029, #161b24);
+         border: 1px solid var(--accent); border-radius: 12px; padding: 1.5rem; }
+  .top h2 { border: 0; margin: 0 0 .6rem; color: var(--accent); }
+  code { font: .88em ui-monospace, monospace; color: var(--accent); }
+  ul { padding-left: 1.2rem; color: var(--dim); }
+  footer { color: var(--dim); font-size: .82rem; margin-top: 3rem;
+           border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Architecture review — counterfact</h1>
+  <p class="lede">
+    Deepening opportunities for the hottest module. Vocabulary follows
+    <code>GLOSSARY.md</code>: <strong>module</strong>, <strong>interface</strong>,
+    <strong>depth</strong>, <strong>seam</strong>, <strong>adapter</strong>,
+    <strong>leverage</strong>, <strong>locality</strong>. ADR-0001…0004 are not
+    re-litigated. Self-contained: no CDN, inline SVG only.
+  </p>
+
+  <h2>Candidate 1 — deepen the replay module</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="badge strong">Strong</span>
+      <h3>Before: one shallow module</h3>
+      <p class="files">counterfact/runner.py (293 lines)</p>
+      <p><strong>Problem:</strong> pure state transformation, filesystem copying,
+      subprocess control and log construction shared one module. The
+      <strong>interface</strong> was nearly as complex as the implementation,
+      and there was no <strong>seam</strong> on which to test the search
+      algorithm without launching processes.</p>
+      <p><strong>Deletion test:</strong> deleting <code>_compose</code> would
+      only move complexity elsewhere. Deleting the whole module would
+      concentrate it — the signal to deepen.</p>
+      <div class="viz">
+        <svg viewBox="0 0 460 210" role="img" aria-label="Before: shallow runner module">
+          <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#56657b"/></marker></defs>
+          <rect class="box hot" x="120" y="20" width="220" height="170"/>
+          <text class="lab" x="230" y="45" text-anchor="middle">runner.py — shallow</text>
+          <text class="sub" x="230" y="68" text-anchor="middle">compose() · copy_inputs()</text>
+          <text class="sub" x="230" y="86" text-anchor="middle">child_setup() · kill_group()</text>
+          <text class="sub" x="230" y="104" text-anchor="middle">Popen() · read_capped()</text>
+          <text class="sub" x="230" y="122" text-anchor="middle">oracle.classify() · redact()</text>
+          <text class="sub" x="230" y="152" text-anchor="middle" fill="#f08a8a">4 responsibilities, 1 module</text>
+          <text class="sub" x="230" y="170" text-anchor="middle">no testable seam</text>
+          <path class="edge" d="M30,105 L112,105"/>
+          <text class="sub" x="24" y="94">minimize</text>
+          <path class="edge" d="M348,105 L430,105"/>
+          <text class="sub" x="372" y="94">child proc</text>
+        </svg>
+      </div>
+    </div>
+    <div class="card">
+      <span class="badge strong">Strong</span>
+      <h3>After: one deep seam, two adapters</h3>
+      <p class="files">composition.py · workspace.py · process.py · ports.py · runner.py (140 lines)</p>
+      <p><strong>Solution:</strong> a pure <strong>module</strong> computes the
+      complete env/argv/umask triple; two <strong>adapters</strong> own the
+      filesystem and the process; <code>Observer</code> in <code>ports.py</code>
+      is the <strong>interface</strong> that is the test surface.</p>
+      <p><strong>Benefits:</strong> <strong>locality</strong> — each external
+      dependency lives in exactly one place. <strong>Leverage</strong> — one
+      <code>compose()</code> serves every experiment. The ddmin and proof
+      modules now depend on an interface, and the whole algorithm is testable
+      without a process.</p>
+      <div class="viz">
+        <svg viewBox="0 0 460 210" role="img" aria-label="After: deep module with two adapters">
+          <rect class="box" x="20" y="18" width="120" height="46"/>
+          <text class="lab" x="80" y="38" text-anchor="middle">minimize / proof</text>
+          <text class="sub" x="80" y="54" text-anchor="middle">pure control flow</text>
+          <rect class="box cool" x="170" y="18" width="120" height="46"/>
+          <text class="lab" x="230" y="38" text-anchor="middle">Observer</text>
+          <text class="sub" x="230" y="54" text-anchor="middle">interface = test surface</text>
+          <rect class="box cool" x="170" y="88" width="120" height="46"/>
+          <text class="lab" x="230" y="108" text-anchor="middle">runner.py</text>
+          <text class="sub" x="230" y="124" text-anchor="middle">thin orchestrator</text>
+          <rect class="box" x="20" y="158" width="120" height="42"/>
+          <text class="lab" x="80" y="176" text-anchor="middle">composition.py</text>
+          <text class="sub" x="80" y="191" text-anchor="middle">pure · deep</text>
+          <rect class="box" x="170" y="158" width="120" height="42"/>
+          <text class="lab" x="230" y="176" text-anchor="middle">workspace.py</text>
+          <text class="sub" x="230" y="191" text-anchor="middle">adapter: filesystem</text>
+          <rect class="box" x="320" y="158" width="120" height="42"/>
+          <text class="lab" x="380" y="176" text-anchor="middle">process.py</text>
+          <text class="sub" x="380" y="191" text-anchor="middle">adapter: subprocess</text>
+          <path class="edge" d="M140,41 L166,41"/>
+          <path class="edge" d="M230,64 L230,84"/>
+          <path class="edge" d="M205,134 L100,156"/>
+          <path class="edge" d="M230,134 L230,156"/>
+          <path class="edge" d="M255,134 L370,156"/>
+          <path class="seam" d="M150,145 L310,145" stroke-width="1.2"/>
+          <text class="sub" x="230" y="143" text-anchor="middle" fill="#f0b37e">real seam (two adapters)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <h2>Other candidates</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="badge worth">Worth exploring</span>
+      <h3>Move report rendering behind a Writer interface</h3>
+      <p class="files">counterfact/report.py, counterfact/cli.py</p>
+      <p><strong>Problem:</strong> the CLI knows four renderer names and four
+      output destinations. <strong>Solution:</strong> one writer interface with
+      format and destination as values. <strong>Benefit:</strong> less
+      conditional <strong>locality</strong> in the CLI. Deferred: four renderers
+      do not yet justify the extra <strong>module</strong>.</p>
+    </div>
+    <div class="card">
+      <span class="badge spec">Speculative</span>
+      <h3>Pluggable capture probes</h3>
+      <p class="files">counterfact/state.py</p>
+      <p><strong>Problem:</strong> new factor kinds require editing three
+      modules. <strong>Solution:</strong> a probe registry. Deferred: a plugin
+      registry would widen the untrusted-input surface of a security-sensitive
+      path. ADR-0003 governs; not worth the trade at 0.1.0.</p>
+    </div>
+    <div class="card">
+      <span class="badge spec">Rejected (ADR conflict)</span>
+      <h3>A convenience shell mode</h3>
+      <p><strong>Problem it would solve:</strong> pipelines in the replayed
+      command. <strong>Why rejected:</strong> contradicts ADR-0001 and would
+      reintroduce command injection from snapshot values. Marked only so future
+      reviewers do not re-suggest it.</p>
+    </div>
+  </div>
+
+  <h2>Grilling decisions</h2>
+  <ul>
+    <li><strong>Constraint:</strong> no program function may change — frozen
+      behaviour golden recorded before any edit.</li>
+    <li><strong>Dependency:</strong> <code>composition.py</code> may import
+      <code>safety</code> and <code>types</code>, but never <code>workspace</code>
+      or <code>process</code>.</li>
+    <li><strong>Behind the seam:</strong> filesystem and subprocess are
+      adapters, so a future container adapter is a replacement, not a rewrite.</li>
+    <li><strong>Tests that survive:</strong> all 58. The <code>Observer</code>
+      interface is the test surface; no test needed a rewrite for the refactor.</li>
+    <li><strong>New glossary terms:</strong> Composition, Observer, Adapter,
+      Equivalence gate — added to <code>GLOSSARY.md</code>.</li>
+  </ul>
+
+  <div class="top">
+    <h2>Top recommendation</h2>
+    <p>Deepen <strong>runner.py</strong> first (candidate 1). It was the highest
+    churn module, its interface was nearly as complex as its implementation,
+    and it had no <strong>seam</strong> for testing the search algorithm. The
+    deepening is already landed: <code>EQUIVALENCE OK</code> (27,761 bytes,
+    byte-identical observable behaviour), 58 tests green, 12/12 review rounds
+    PASS. The two deferred candidates should stay deferred until a second
+    failure mode actually appears.</p>
+    <p style="color:var(--dim);margin-bottom:0"><strong>Hard constraint honoured:</strong>
+    no function of the program changed. See <code>EQUIVALENCE.md</code>.</p>
+  </div>
+
+  <footer>
+    Generated for the improve-codebase-architecture workflow. Offline-only:
+    inline SVG, no external stylesheets, no scripts, no network calls.
+  </footer>
+</main>
+</body>
+</html>

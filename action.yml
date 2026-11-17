@@ -1,0 +1,79 @@
+name: counterfact
+description: >-
+  Find the smallest tested environment change that flips a passing command into
+  a specific failure. Composite action skeleton; pin to a release before use.
+author: counterfact contributors
+branding:
+  icon: search
+  color: purple
+
+inputs:
+  good:
+    description: Path to the passing-state snapshot JSON
+    required: true
+  bad:
+    description: Path to the failing-state snapshot JSON
+    required: true
+  command:
+    description: Command to replay (argv, no shell). Pass via a quoted string.
+    required: true
+  expect-fail-text:
+    description: Required failure signature; unrelated crashes are UNRESOLVED
+    required: false
+    default: ""
+  python-version:
+    description: Python version used to run counterfact itself
+    required: false
+    default: "3.11"
+  max-runs:
+    description: Hard cap on command executions
+    required: false
+    default: "60"
+  format:
+    description: text | json | sarif | github
+    required: false
+    default: sarif
+
+outputs:
+  report:
+    description: Path to the emitted report
+    value: ${{ steps.run.outputs.report }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install counterfact (offline-friendly, no dependencies)
+      shell: bash
+      run: python -m pip install --no-deps "${{ github.action_path }}"
+
+    - name: Inert plan (executes nothing)
+      shell: bash
+      run: |
+        counterfact plan --good "${{ inputs.good }}" --bad "${{ inputs.bad }}" \
+          -- ${{ inputs.command }} > plan.json || true
+
+    - name: Run controlled counterfactual experiments
+      id: run
+      shell: bash
+      env:
+        CF_EXPECT: ${{ inputs.expect-fail-text }}
+      run: |
+        set +e
+        args=(run --good "${{ inputs.good }}" --bad "${{ inputs.bad }}" --yes
+              --max-runs "${{ inputs.max-runs }}"
+              --format "${{ inputs.format }}")
+        if [ -n "$CF_EXPECT" ]; then
+          args+=(--expect-fail-text "$CF_EXPECT")
+        fi
+        counterfact "${args[@]}" -- ${{ inputs.command }} | tee counterfact-report.txt
+        status=${PIPESTATUS[0]}
+        echo "report=counterfact-report.txt" >> "$GITHUB_OUTPUT"
+        # 1 = inconclusive: report it, but do not mask a safety refusal (3),
+        # a config error (2) or an internal error (4).
+        if [ "$status" -ge 2 ]; then exit "$status"; fi
+        exit 0
